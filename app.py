@@ -19,7 +19,7 @@ in_exp_players = []
 #This funtion should clean up the copy of the imported list. Seperate the guardian list, drop inches off height and change into int, as well as change experience into a boolean.
 def clean_data():
     for player in bb_players:
-        guardians = player['guardians'].split(' '' ')
+        player['guardians'] = player['guardians'].split(' and ')
     for player in bb_players:
         height = player['height'].split(' ')
         player['height'] = int(height[0])
@@ -52,7 +52,7 @@ def balence_teams():
 
                     
 #This function figures out and displays each team stats nicely. 
-#I found a version of line 65 and 68's code on (https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/) which helped clean up my code.
+#I found a version of line 65 code on (https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/) which helped clean up my code.
 def team_stats(team):
     how_tall = []
     for player in team:
@@ -65,8 +65,11 @@ def team_stats(team):
     team_players = ', '.join(player['name'] for player in team)
     print(team_players , '\n')
     print('Team Guardians:')
-    team_guardians = ', '.join(player['guardians'] for player in team)
-    print(team_guardians)
+    team_guardians = []
+    for player in team:
+        guardians = player['guardians']
+        team_guardians.extend(guardians)
+    print(', '.join(team_guardians))
 
 
 #This fuction displays the main menu and allows the guest to quit or proceed accordingly.
